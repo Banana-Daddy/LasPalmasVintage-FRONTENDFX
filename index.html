@@ -896,6 +896,240 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 /* ============================================
+   CONCIERGE — the big new hook
+   ============================================ */
+.concierge {
+  position: relative;
+  padding: 4rem 1.25rem 4.5rem;
+  background: var(--coral); color: var(--paper);
+  overflow: hidden;
+  border-top: 4px solid var(--ink);
+  border-bottom: 4px solid var(--ink);
+}
+.concierge::before {
+  /* paper texture */
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.06; mix-blend-mode: multiply;
+}
+.concierge-stars {
+  position: absolute; pointer-events: none; user-select: none;
+  font-family: 'Caveat', cursive; font-weight: 600; font-size: 1.6rem; color: var(--mustard);
+}
+.concierge-stars.tl { top: 14px; left: 18px; transform: rotate(-10deg); }
+.concierge-stars.br { bottom: 18px; right: 18px; transform: rotate(8deg); }
+
+.concierge-inner {
+  position: relative; z-index: 2;
+  max-width: 720px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 1.25rem;
+  align-items: flex-start;
+}
+.concierge-stamp {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Caveat', cursive; font-weight: 600;
+  font-size: 1.2rem;
+  background: var(--paper); color: var(--ink);
+  padding: 4px 14px;
+  border-radius: 9999px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-2deg);
+}
+.concierge-stamp::before { content: '✦'; color: var(--coral); }
+.concierge-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "SOFT" 100, "opsz" 144, "wght" 800;
+  font-style: italic;
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--paper);
+  text-shadow: 4px 4px 0 var(--ink);
+}
+.concierge-title em {
+  font-style: italic;
+  background: var(--mustard);
+  color: var(--ink);
+  padding: 2px 10px;
+  margin-left: 2px;
+  text-shadow: none;
+  display: inline-block;
+  transform: rotate(-1deg);
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.concierge-body {
+  font-family: 'Newsreader', serif;
+  font-size: 1.05rem; line-height: 1.65;
+  color: var(--paper);
+  max-width: 540px;
+}
+.concierge-body strong { background: var(--ink); color: var(--mustard); padding: 1px 6px; font-weight: 600; }
+
+.deal-row {
+  display: grid; grid-template-columns: 1fr; gap: 12px;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.deal-pill {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 18px 20px;
+  background: var(--paper); color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 var(--ink);
+  position: relative;
+  transition: transform 0.25s ease;
+}
+.deal-pill:hover { transform: translate(-2px, -2px); }
+.deal-pill.mustard { background: var(--mustard); }
+.deal-pill .big {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 100, "opsz" 144, "wght" 800;
+  font-style: italic;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--coral);
+  letter-spacing: -0.02em;
+}
+.deal-pill.mustard .big { color: var(--ink); }
+.deal-pill .small {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-size: 0.9rem; line-height: 1.3;
+  color: var(--ink);
+}
+.deal-pill .price-mark {
+  position: absolute; top: -10px; right: -10px;
+  width: 44px; height: 44px;
+  background: var(--mustard); color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transform: rotate(8deg);
+  font-family: 'Caveat', cursive; font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.deal-pill.mustard .price-mark { background: var(--coral); color: var(--paper); }
+
+.concierge-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 0.5rem; align-items: center; }
+.concierge-script {
+  font-family: 'Caveat', cursive; font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--mustard);
+}
+
+/* ============================================
+   KAFTANS — fall teaser
+   ============================================ */
+.kaftans {
+  padding: 3.5rem 1.25rem 4rem;
+  background: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.kaftans::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: repeating-linear-gradient(90deg,
+    var(--palm) 0 14px,
+    transparent 14px 28px);
+}
+.kaftans::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: repeating-linear-gradient(90deg,
+    var(--palm) 0 14px,
+    transparent 14px 28px);
+}
+.kaftans-inner {
+  max-width: 720px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 1rem;
+  text-align: center; align-items: center;
+}
+.kaftan-stamp {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Caveat', cursive; font-weight: 600;
+  font-size: 1.25rem; color: var(--palm-deep);
+  transform: rotate(-2deg);
+}
+.kaftan-stamp::before, .kaftan-stamp::after { content: '✦'; color: var(--mustard); }
+.kaftans-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "SOFT" 100, "opsz" 144, "wght" 800;
+  font-style: italic;
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  line-height: 1; letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.kaftans-title .accent { color: var(--palm); }
+.kaftans-body {
+  font-family: 'Newsreader', serif;
+  font-size: 1rem; line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 480px;
+}
+.kaftans-body strong { color: var(--ink); font-weight: 600; }
+.kaftans-meta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 12px;
+  font-family: 'Caveat', cursive; font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--coral);
+}
+.kaftans-meta span {
+  background: var(--paper-2);
+  padding: 3px 12px;
+  border: 1.5px solid var(--ink);
+  border-radius: 9999px;
+  color: var(--ink);
+}
+
+/* ============================================
+   PLATFORMS — where to find us
+   ============================================ */
+.platforms {
+  padding: 2.5rem 1.25rem 3rem;
+  background: var(--paper-2);
+  position: relative;
+  text-align: center;
+}
+.platforms-inner {
+  max-width: 880px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 1rem; align-items: center;
+}
+.platforms-stamp {
+  font-family: 'Caveat', cursive; font-weight: 600;
+  font-size: 1.2rem; color: var(--ink-soft);
+}
+.platforms-stamp::before, .platforms-stamp::after { content: ' ✦ '; color: var(--coral); }
+.platform-grid {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  width: 100%;
+}
+.platform-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 100, "wght" 700;
+  font-style: italic;
+  font-size: 1rem;
+  border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.platform-pill:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+.platform-pill.coral { background: var(--coral); color: var(--paper); transform: rotate(-1deg); }
+.platform-pill.mustard { background: var(--mustard); color: var(--ink); transform: rotate(1deg); }
+.platform-pill.palm { background: var(--palm); color: var(--paper); transform: rotate(-1deg); }
+.platform-pill.blue { background: var(--blue); color: var(--paper); transform: rotate(1deg); }
+.platform-pill.cream { background: var(--paper); color: var(--ink); transform: rotate(-1deg); }
+.platform-pill:hover { transform: rotate(0deg) translate(-1px, -1px); }
+
+/* ============================================
    BANANA BYTES CREDIT
    ============================================ */
 .bb-credit {
@@ -936,6 +1170,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .postcard { padding: 2.5rem 2.5rem 3rem; }
 
   .ticket-band { padding: 4rem 2rem 2rem; }
+
+  .concierge { padding: 5.5rem 2rem 6rem; }
+  .deal-row { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .deal-pill .big { font-size: 3rem; }
+
+  .kaftans { padding: 5rem 2rem; }
+
+  .platforms { padding: 3.5rem 2rem; }
 }
 
 @media (min-width: 1024px) {
@@ -972,7 +1214,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 <!-- ===== MOBILE NAV ===== -->
 <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true">
   <a href="https://laspalmasvintage.myshopify.com" target="_blank" rel="noopener" onclick="closeMenu()">Shop All</a>
-  <a href="https://laspalmasvintage.myshopify.com" target="_blank" rel="noopener" onclick="closeMenu()">New Arrivals</a>
+  <a href="#concierge" onclick="closeMenu()">Concierge</a>
+  <a href="#kaftans" onclick="closeMenu()">Kids Kaftans</a>
   <a href="#about" onclick="closeMenu()">The Scrapbook</a>
   <a href="#visit" onclick="closeMenu()">Visit Us</a>
   <p class="mn-meta">vintage &amp; preloved ✦ always open online</p>
@@ -1056,6 +1299,42 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   </div>
 </div>
 
+<!-- ===== CONCIERGE — the big new hook ===== -->
+<section class="concierge reveal" id="concierge">
+  <span class="concierge-stars tl" aria-hidden="true">✦</span>
+  <span class="concierge-stars br" aria-hidden="true">✦</span>
+  <div class="concierge-inner">
+    <span class="concierge-stamp">Now Booking · Spring &amp; Summer</span>
+    <h2 class="concierge-title">
+      Going to a party? <em>Let us shop for you.</em>
+    </h2>
+    <p class="concierge-body">
+      A curated vintage concierge experience for <strong>parties</strong>, <strong>bachelorette weekends</strong>, festival weekends, and "I just need something I haven't worn before." Tell us the vibe, the venue, and the date — we'll hand-pull a rack and bring it to you.
+    </p>
+
+    <div class="deal-row">
+      <div class="deal-pill">
+        <span class="big">$250</span>
+        <span class="small">starting fee — covers the curation, the rack, and the trip out</span>
+        <span class="price-mark">to start</span>
+      </div>
+      <div class="deal-pill mustard">
+        <span class="big">$100 back</span>
+        <span class="small">spend $100+ on pieces from your rack and $100 comes right back to you</span>
+        <span class="price-mark">bonus</span>
+      </div>
+    </div>
+
+    <div class="concierge-cta-row">
+      <a href="mailto:hello@laspalmasvintage.com?subject=Concierge%20session%20inquiry" class="btn btn-cream">
+        Ask about a session
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <span class="concierge-script">festival szn ✦ here for you</span>
+    </div>
+  </div>
+</section>
+
 <!-- ===== ABOUT — SCRAPBOOK PAGE ===== -->
 <section class="about reveal" id="about">
   <div class="about-page">
@@ -1072,7 +1351,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
         <span class="dropcap">L</span>as Palmas Vintage is a lovingly curated collection of preloved womenswear, sourced and styled in the heart of Palm Springs. From sequined 80's blazers to mid-century evening wear, every piece carries the spirit of decades past — <strong>the glamour, the craftsmanship, the stories woven into every stitch.</strong>
       </p>
       <p>
-        We believe in slow fashion, second lives, and the genuine thrill of finding something you'll actually wear. Vintage &amp; preloved, always open online — come browse.
+        We believe in slow fashion, second lives, and the genuine thrill of finding something you'll actually wear. <strong>Sourced from estate sales, yard sales, thrift shops, and the occasional incredible donation.</strong>
+      </p>
+      <p>
+        Vintage &amp; preloved, always open online — come browse.
       </p>
     </div>
 
@@ -1163,6 +1445,25 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   </div>
 </section>
 
+<!-- ===== KAFTANS — fall '26 teaser ===== -->
+<section class="kaftans reveal" id="kaftans">
+  <div class="kaftans-inner">
+    <span class="kaftan-stamp">Coming this fall</span>
+    <h2 class="kaftans-title">Silk Kaftans <span class="accent">for kids.</span></h2>
+    <p class="kaftans-body">
+      <strong>Hand-sewn vintage silk kaftans</strong> — the first run of fifty, dropping Fall '26. Made from vintage silk, silk-blend, and a little synthetic where the colors are too good to pass up.
+    </p>
+    <div class="kaftans-meta">
+      <span>$45 – $80</span>
+      <span>50 pieces · made by hand</span>
+    </div>
+    <a href="mailto:hello@laspalmasvintage.com?subject=Kids%20kaftan%20wishlist" class="btn btn-mustard" style="margin-top: 0.5rem;">
+      Get on the list
+      <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
 <!-- ===== WALLPAPERED QUOTE ===== -->
 <section class="wallpaper-section reveal">
   <div class="wallpaper-inner">
@@ -1172,6 +1473,20 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
       <span class="quote-sticker s3">Preloved.</span>
     </div>
     <p class="quote-attribution">that's the whole deal</p>
+  </div>
+</section>
+
+<!-- ===== PLATFORMS — also find us at ===== -->
+<section class="platforms reveal">
+  <div class="platforms-inner">
+    <span class="platforms-stamp">also find us at</span>
+    <div class="platform-grid">
+      <a href="https://laspalmasvintage.myshopify.com" target="_blank" rel="noopener" class="platform-pill coral">Webador</a>
+      <a href="https://www.whatnot.com" target="_blank" rel="noopener" class="platform-pill mustard">Whatnot live</a>
+      <a href="https://www.ebay.com" target="_blank" rel="noopener" class="platform-pill palm">eBay</a>
+      <a href="https://poshmark.com" target="_blank" rel="noopener" class="platform-pill blue">Poshmark</a>
+      <span class="platform-pill cream">In-person pop-ups</span>
+    </div>
   </div>
 </section>
 
